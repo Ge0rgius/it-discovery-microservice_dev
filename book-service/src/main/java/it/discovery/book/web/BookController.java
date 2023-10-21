@@ -1,7 +1,7 @@
 package it.discovery.book.web;
 
-import it.discovery.monolith.domain.Book;
-import it.discovery.monolith.repository.BookRepository;
+import it.discovery.book.domain.Book;
+import it.discovery.book.persistence.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

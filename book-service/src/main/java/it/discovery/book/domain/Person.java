@@ -1,6 +1,5 @@
 package it.discovery.book.domain;
 
-import it.discovery.monolith.domain.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -20,13 +19,13 @@ import java.util.List;
  *
  */
 public class Person extends BaseEntity {
-	private String name;
+    private String name;
 
-	private String biography;
+    private String biography;
 
-	@OneToMany
-	private List<Book> books;
+    @OneToMany
+    private List<Book> books;
 
-	private LocalDate birthDate;
+    private LocalDate birthDate;
 
 }

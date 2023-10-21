@@ -82,5 +82,6 @@
 		<module>legacy</module>
 		<module>order-client</module>
 		<module>platform</module>
+		<module>book-service</module>
 	</modules>
 </project>
