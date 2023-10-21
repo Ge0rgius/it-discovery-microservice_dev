@@ -1,11 +1,9 @@
 package it.discovery.payment.service;
 
-import it.discovery.monolith.domain.Notification;
 import it.discovery.monolith.domain.Order;
-import it.discovery.monolith.domain.Payment;
-import it.discovery.monolith.repository.OrderRepository;
-import it.discovery.monolith.repository.PaymentRepository;
 import it.discovery.monolith.service.NotificationService;
+import it.discovery.payment.domain.Payment;
+import it.discovery.payment.persistence.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,15 +25,15 @@ public class PaymentService {
 		orderRepository.save(order);
 		
 		paymentRepository.save(payment);
-		
-		Notification notification = new Notification();
-		notification.setEmail(order.getCustomer().getEmail());
-		notification.setRecipient(order.getCustomer().getName());
-		notification.setTitle("Order " + order.getId() + " was payed");
-		notification.setText("Hi/n. Your order was payed successfully");
 
-		notificationService.sendNotification(notification);
-		System.out.println("Charging completed");
+//		Notification notification = new Notification();
+//		notification.setEmail(order.getCustomer().getEmail());
+//		notification.setRecipient(order.getCustomer().getName());
+//		notification.setTitle("Order " + order.getId() + " was payed");
+//		notification.setText("Hi/n. Your order was payed successfully");
+//
+//		notificationService.sendNotification(notification);
+//		System.out.println("Charging completed");
 	}
 
 }

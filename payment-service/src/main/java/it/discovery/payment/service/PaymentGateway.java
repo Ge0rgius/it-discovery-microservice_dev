@@ -1,7 +1,7 @@
 package it.discovery.payment.service;
 
 import it.discovery.monolith.domain.Order;
-import it.discovery.monolith.domain.Payment;
+import it.discovery.payment.domain.Payment;
 import org.springframework.stereotype.Component;
 
 @Component

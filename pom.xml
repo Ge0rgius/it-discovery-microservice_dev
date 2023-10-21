@@ -84,5 +84,6 @@
 		<module>platform</module>
 		<module>book-service</module>
 		<module>notification-service</module>
+		<module>payment-service</module>
 	</modules>
 </project>
