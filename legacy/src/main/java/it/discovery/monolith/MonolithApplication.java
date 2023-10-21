@@ -22,7 +22,8 @@ public class MonolithApplication {
 	
     @Bean
     public ApplicationRunner applicationRunner(
-            BookRepository bookRepository, CustomerRepository customerRepository, PaymentProviderRepository paymentProviderRepository,
+            BookRepository bookRepository, CustomerRepository customerRepository,
+			PaymentProviderRepository paymentProviderRepository,
             ManagerRepository managerRepository) {
         return args -> {
     		Book book = new Book();

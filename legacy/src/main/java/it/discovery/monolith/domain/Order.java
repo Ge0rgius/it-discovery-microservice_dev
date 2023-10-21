@@ -6,11 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +15,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "ORDERS")
 public class Order extends BaseEntity {
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<OrderItem> items;
 
 	@ManyToOne

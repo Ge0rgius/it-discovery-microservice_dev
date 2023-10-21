@@ -52,22 +52,23 @@ public class ShopController {
 	}
 
 	@PostMapping("books")
-	public void saveBook(@RequestBody Book book) {
-		bookRepository.save(book);				
+	public Book saveBook(@RequestBody Book book) {
+		return bookRepository.save(book);
 	}
 
 	@PutMapping("books/{id}")
 	public void updateBook(@RequestBody Book book) {
 		bookRepository.save(book);				
 	}
-	
-	public Order createOrder(int bookId, int number, int customerId) {
+
+	@PostMapping("orders/{bookId}/{number}/{customerId}")
+	public Order createOrder(@PathVariable int bookId, @PathVariable int number, @PathVariable int customerId) {
 		return orderService.createOrder(bookId, number, customerId);		
 	}
 	
 	@PostMapping("customers")
-	public void saveCustomer(Customer customer) {
-		customerRepository.save(customer);				
+	public Customer saveCustomer(Customer customer) {
+		return customerRepository.save(customer);
 	}
 
 	@GetMapping("customers")
@@ -80,8 +81,8 @@ public class ShopController {
 		orderService.addBook(orderId, bookId, number);
 	}
 	
-	@PostMapping("orders")
-	public void completeOrder(int orderId) {
+	@PostMapping("orders/{orderId}")
+	public void completeOrder(@PathVariable int orderId) {
 		orderService.complete(orderId);
 	}
 	
