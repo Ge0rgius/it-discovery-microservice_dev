@@ -83,5 +83,6 @@
 		<module>order-client</module>
 		<module>platform</module>
 		<module>book-service</module>
+		<module>notification-service</module>
 	</modules>
 </project>

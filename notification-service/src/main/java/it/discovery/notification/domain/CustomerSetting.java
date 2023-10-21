@@ -1,7 +1,7 @@
 package it.discovery.notification.domain;
 
-import it.discovery.monolith.domain.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +11,8 @@ import lombok.Setter;
 @Table
 public class CustomerSetting extends BaseEntity {
 
-	private boolean notifyByEmail;
-	
-	private boolean notifyByPhone;
+    private boolean notifyByEmail;
+
+    private boolean notifyByPhone;
 
 }
