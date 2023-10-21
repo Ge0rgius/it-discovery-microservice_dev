@@ -45,6 +45,11 @@
 			<artifactId>jakarta.activation-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
@@ -75,5 +80,6 @@
 
 	<modules>
 		<module>legacy</module>
+		<module>order-client</module>
 	</modules>
 </project>

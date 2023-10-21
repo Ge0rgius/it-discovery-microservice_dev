@@ -2,7 +2,10 @@ package it.discovery.order.web;
 
 import it.discovery.monolith.domain.Order;
 import it.discovery.monolith.service.OrderService;
+import it.discovery.order.client.dto.CreateOrderDTO;
+import it.discovery.order.client.dto.OrderDTO;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,9 +17,12 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping("{bookId}/{number}/{customerId}")
-    public Order createOrder(@PathVariable int bookId, @PathVariable int number, @PathVariable int customerId) {
-        return orderService.createOrder(bookId, number, customerId);
+    private final ModelMapper modelMapper = new ModelMapper();
+
+    @PostMapping
+    //TODO Create another API version to preserve backward-compatibility
+    public OrderDTO createOrder(@RequestBody CreateOrderDTO orderDTO) {
+        return toDTO(orderService.createOrder(orderDTO.bookId(), orderDTO.number(), orderDTO.customerId()));
     }
 
     @PutMapping("{orderId}")
@@ -35,13 +41,16 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<Order> findOrders() {
-        return orderService.findOrders();
+    public List<OrderDTO> findOrders() {
+        return orderService.findOrders().stream().map(this::toDTO).toList();
     }
 
     @GetMapping("{orderId}")
-    public Order findOrderById(@PathVariable int orderId) {
-        return orderService.findOrderById(orderId);
+    public OrderDTO findOrderById(@PathVariable int orderId) {
+        return toDTO(orderService.findOrderById(orderId));
     }
 
+    private OrderDTO toDTO(Order order) {
+        return modelMapper.map(order, OrderDTO.class);
+    }
 }

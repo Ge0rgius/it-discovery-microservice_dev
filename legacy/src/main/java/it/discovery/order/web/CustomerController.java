@@ -2,7 +2,9 @@ package it.discovery.order.web;
 
 import it.discovery.monolith.domain.Customer;
 import it.discovery.monolith.repository.CustomerRepository;
+import it.discovery.order.client.dto.CustomerDTO;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +19,24 @@ public class CustomerController {
 
     private final CustomerRepository customerRepository;
 
+    private final ModelMapper modelMapper = new ModelMapper();
+
     @PostMapping
-    public Customer save(Customer customer) {
-        return customerRepository.save(customer);
+    public CustomerDTO save(CustomerDTO customer) {
+        return toDTO(customerRepository.save(toEntity(customer)));
     }
 
     @GetMapping
-    public List<Customer> findAll() {
-        return customerRepository.findAll();
+    public List<CustomerDTO> findAll() {
+        return customerRepository.findAll().stream().map(this::toDTO).toList();
     }
 
+    //TODO create separate mapping service
+    private CustomerDTO toDTO(Customer customer) {
+        return modelMapper.map(customer, CustomerDTO.class);
+    }
+
+    private Customer toEntity(CustomerDTO dto) {
+        return modelMapper.map(dto, Customer.class);
+    }
 }
