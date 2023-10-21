@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import it.discovery.monolith.repository.PaymentProviderRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ import it.discovery.monolith.domain.Order;
 public class ShopControllerTest {
 	@Autowired
 	MockMvc mockMvc;
+
+	@Autowired
+	PaymentProviderRepository paymentProviderRepository;
 
 	static final ObjectMapper MAPPER = new ObjectMapper();
 	
@@ -53,6 +57,7 @@ public class ShopControllerTest {
 		Customer customer = new Customer();
 		customer.setEmail("customer@gmail.com");
 		customer.setName("John Stones");
+		customer.setProvider(paymentProviderRepository.findById(1).orElseThrow());
 
 		actions = mockMvc.perform(
 				post("/customers").content(MAPPER.writeValueAsBytes(customer)).contentType(MediaType.APPLICATION_JSON));

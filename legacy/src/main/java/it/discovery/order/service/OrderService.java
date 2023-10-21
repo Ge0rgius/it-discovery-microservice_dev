@@ -1,8 +1,4 @@
-package it.discovery.monolith.service;
-
-import java.util.List;
-
-import org.springframework.stereotype.Service;
+package it.discovery.order.service;
 
 import it.discovery.monolith.domain.Notification;
 import it.discovery.monolith.domain.Order;
@@ -10,7 +6,12 @@ import it.discovery.monolith.domain.OrderItem;
 import it.discovery.monolith.repository.BookRepository;
 import it.discovery.monolith.repository.CustomerRepository;
 import it.discovery.monolith.repository.OrderRepository;
+import it.discovery.monolith.service.NotificationService;
+import it.discovery.monolith.service.PaymentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor

@@ -19,9 +19,7 @@ public class SchedulerService {
 		while (true) {
 			try {
 				orderRepository.findAll().stream().filter(order -> order.isPayed() && !order.isDelivered())
-						.forEach(order -> {
-							deliveryService.deliver(order);
-						});
+						.forEach(deliveryService::deliver);
 				// Activate each 30 seconds
 				Thread.sleep(30 * 60 * 1000);
 			} catch (InterruptedException e) {
