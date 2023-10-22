@@ -1,10 +1,13 @@
 package it.discovery.order.service;
 
+import event.IntegrationEvent;
+import event.OrderCompletedEvent;
 import it.discovery.order.domain.Order;
 import it.discovery.order.domain.OrderItem;
 import it.discovery.order.persistence.CustomerRepository;
 import it.discovery.order.persistence.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +20,15 @@ public class OrderService {
 
     private final CustomerRepository customerRepository;
 
+    private final KafkaTemplate<Integer, IntegrationEvent> kafkaTemplate;
+
     public void complete(int orderId) {
         orderRepository.findById(orderId).ifPresent(order -> {
             order.setCompleted(true);
             orderRepository.save(order);
+
+            //FIXME avoid orderId duplication
+            kafkaTemplate.send("orders", orderId, new OrderCompletedEvent(orderId));
 
 //            paymentService.pay(order);
 //
