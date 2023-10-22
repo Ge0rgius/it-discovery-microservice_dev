@@ -1,8 +1,8 @@
 package it.discovery.order.web;
 
-import it.discovery.monolith.domain.Customer;
-import it.discovery.monolith.repository.CustomerRepository;
 import it.discovery.order.client.dto.CustomerDTO;
+import it.discovery.order.domain.Customer;
+import it.discovery.order.persistence.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;

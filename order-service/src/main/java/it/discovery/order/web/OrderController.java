@@ -1,9 +1,9 @@
 package it.discovery.order.web;
 
-import it.discovery.monolith.domain.Order;
-import it.discovery.monolith.service.OrderService;
 import it.discovery.order.client.dto.CreateOrderDTO;
 import it.discovery.order.client.dto.OrderDTO;
+import it.discovery.order.domain.Order;
+import it.discovery.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +22,13 @@ public class OrderController {
     @PostMapping
     //TODO Create another API version to preserve backward-compatibility
     public OrderDTO createOrder(@RequestBody CreateOrderDTO orderDTO) {
-        return toDTO(orderService.createOrder(orderDTO.bookId(), orderDTO.number(), orderDTO.customerId()));
+        return toDTO(orderService.createOrder(orderDTO.bookId(),
+                orderDTO.number(), orderDTO.customerId(), orderDTO.price()));
     }
 
     @PutMapping("{orderId}")
-    public void addBook(@PathVariable int orderId, int bookId, int number) {
-        orderService.addBook(orderId, bookId, number);
+    public void addBook(@PathVariable int orderId, int bookId, int number, double price) {
+        orderService.addBook(orderId, bookId, number, price);
     }
 
     @PostMapping("{orderId}")

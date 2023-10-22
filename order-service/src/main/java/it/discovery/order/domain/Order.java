@@ -1,8 +1,6 @@
 package it.discovery.order.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import it.discovery.monolith.domain.BaseEntity;
-import it.discovery.monolith.domain.Customer;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +27,7 @@ public class Order extends BaseEntity {
 
     @JsonIgnore
     public double getAmount() {
-        return items.stream().mapToDouble(item -> item.getBook().getPrice() * item.getNumber()).sum();
+        return items.stream().mapToDouble(item -> item.getPrice() * item.getNumber()).sum();
     }
 
     public void addItem(OrderItem item) {
