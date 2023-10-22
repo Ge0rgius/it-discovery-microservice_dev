@@ -7,11 +7,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+
+import java.util.Optional;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @WireMockTest
 class OrderClientTest {
@@ -51,5 +55,18 @@ class OrderClientTest {
 
         //FIXME
         // verify(1, getRequestedFor(urlMatching(STR."/orders/\{orderId}")));
+    }
+
+    @Test
+    void findOne_internalError_retryUsed() {
+        final int orderId = 100;
+        wm.stubFor(get(urlEqualTo(STR. "/orders/\{ orderId }" )).willReturn(aResponse()
+                .withStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())));
+
+        Optional<OrderDTO> orderDTO = orderClient.findOne(orderId);
+        assertTrue(orderDTO.isEmpty());
+
+        //FIXME
+        //verify(3, getRequestedFor(urlMatching(STR."/orders/\{orderId}")));
     }
 }
