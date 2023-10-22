@@ -1,7 +1,7 @@
 package it.discovery.delivery.web;
 
-import it.discovery.monolith.domain.Manager;
-import it.discovery.monolith.repository.ManagerRepository;
+import it.discovery.delivery.domain.Manager;
+import it.discovery.delivery.persistence.ManagerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

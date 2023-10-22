@@ -1,7 +1,5 @@
 package it.discovery.delivery.domain;
 
-import it.discovery.monolith.domain.BaseEntity;
-import it.discovery.monolith.domain.Manager;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

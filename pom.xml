@@ -85,5 +85,6 @@
 		<module>book-service</module>
 		<module>notification-service</module>
 		<module>payment-service</module>
-	</modules>
+        <module>delivery-service</module>
+    </modules>
 </project>

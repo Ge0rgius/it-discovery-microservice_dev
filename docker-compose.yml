@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-  book-service:
+  book:
     build:
       context: book-service
       dockerfile: src/main/resources/book.dockerfile
@@ -9,4 +9,31 @@ services:
       - 8080
     ports:
       - "8080:8080"
-
+  order:
+    build:
+      context: order-service
+      dockerfile: src/main/resources/order.dockerfile
+    expose:
+      - 8080
+    ports:
+      - "8081:8080"
+  payment:
+    build:
+      context: payment-service
+      dockerfile: src/main/resources/payment.dockerfile
+    expose:
+      - 8080
+    ports:
+      - "8082:8080"
+  notification:
+    build:
+      context: notification-service
+      dockerfile: src/main/resources/notification.dockerfile
+  delivery:
+    build:
+      context: delivery-service
+      dockerfile: src/main/resources/delivery.dockerfile
+    expose:
+      - 8080
+    ports:
+      - "8083:8080"

@@ -1,7 +1,5 @@
 package it.discovery.delivery.domain;
 
-import it.discovery.monolith.domain.BaseEntity;
-import it.discovery.monolith.domain.Order;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -16,12 +14,12 @@ import java.util.List;
 @Table
 public class Manager extends BaseEntity {
 
-	private String name;
-	
-	private String email;
-	
-	private String phone;
-	
-	@OneToMany(mappedBy = "deliveryManager")
-	private List<Order> orders;
+    private String name;
+
+    private String email;
+
+    private String phone;
+
+    @OneToMany(mappedBy = "deliveryManager")
+    private List<Order> orders;
 }
