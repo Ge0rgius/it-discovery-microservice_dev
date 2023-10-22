@@ -1,5 +1,6 @@
-package event;
+package event.order;
 
+import event.BaseEvent;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,9 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderPayedEvent extends BaseOrderEvent {
+public class OrderCancelledEvent extends BaseEvent {
 
-    public OrderPayedEvent(int orderId) {
+    public OrderCancelledEvent(int orderId) {
         super(orderId);
     }
 }

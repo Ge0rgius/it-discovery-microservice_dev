@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-public abstract class BaseOrderEvent implements IntegrationEvent {
+public abstract class BaseEvent implements IntegrationEvent {
 
     private String id;
 
@@ -16,8 +16,8 @@ public abstract class BaseOrderEvent implements IntegrationEvent {
 
     private LocalDateTime created;
 
-    public BaseOrderEvent(int orderId) {
-        entityId = orderId;
+    public BaseEvent(int entityId) {
+        this.entityId = entityId;
         id = UUID.randomUUID().toString();
         created = LocalDateTime.now();
     }

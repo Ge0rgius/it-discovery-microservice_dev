@@ -25,6 +25,8 @@ public class Order extends BaseEntity {
 
     private boolean cancelled;
 
+    private boolean verified;
+
     @JsonIgnore
     public double getAmount() {
         return items.stream().mapToDouble(item -> item.getPrice() * item.getNumber()).sum();

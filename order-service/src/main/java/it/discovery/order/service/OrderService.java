@@ -1,7 +1,7 @@
 package it.discovery.order.service;
 
 import event.IntegrationEvent;
-import event.OrderCompletedEvent;
+import event.order.OrderVerifiedEvent;
 import it.discovery.order.domain.Order;
 import it.discovery.order.domain.OrderItem;
 import it.discovery.order.persistence.CustomerRepository;
@@ -22,13 +22,13 @@ public class OrderService {
 
     private final KafkaTemplate<Integer, IntegrationEvent> kafkaTemplate;
 
-    public void complete(int orderId) {
+    public void proceed(int orderId) {
         orderRepository.findById(orderId).ifPresent(order -> {
             order.setCompleted(true);
             orderRepository.save(order);
 
             //FIXME avoid orderId duplication
-            kafkaTemplate.send("orders", orderId, new OrderCompletedEvent(orderId));
+            kafkaTemplate.send("orders", orderId, new OrderVerifiedEvent(orderId));
 
 //            paymentService.pay(order);
 //

@@ -67,4 +67,4 @@ services:
     environment:
       KAFKA_BROKERS: kafka:29092
     ports:
-      - 8090:8080
+      - "8090:8080"
