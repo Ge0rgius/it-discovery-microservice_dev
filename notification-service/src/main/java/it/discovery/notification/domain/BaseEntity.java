@@ -1,24 +1,18 @@
 package it.discovery.notification.domain;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
-@MappedSuperclass
 @Getter
 @Setter
 public abstract class BaseEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+    @Id
+    private String id;
 
-	private LocalDateTime createdAt;
-
-	@PrePersist
-	public void prePersist() {
-		createdAt = LocalDateTime.now();
-	}
-
+    @CreatedDate
+    private LocalDateTime createdAt;
 }

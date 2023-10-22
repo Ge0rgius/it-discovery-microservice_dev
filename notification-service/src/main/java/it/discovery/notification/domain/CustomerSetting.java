@@ -1,14 +1,12 @@
 package it.discovery.notification.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Entity
-@Table
+@Document(collection = "settings")
 public class CustomerSetting extends BaseEntity {
 
     private boolean notifyByEmail;
