@@ -20,6 +20,8 @@ public class KafkaPaymentConsumer {
 
     @KafkaListener(topics = "orders")
     void handle(@Payload IntegrationEvent event) {
+        log.info(STR. "Payment service received event: \{ event }" );
+
         //Pattern matching for switch
         //String templates
         //Unnamed variables

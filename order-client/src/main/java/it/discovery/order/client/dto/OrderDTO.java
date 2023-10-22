@@ -19,4 +19,7 @@ public class OrderDTO {
     private boolean completed;
 
     private boolean cancelled;
+
+    //TODO check if correctly initialized by ModelMapper
+    private double amount;
 }

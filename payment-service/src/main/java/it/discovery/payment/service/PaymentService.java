@@ -1,27 +1,38 @@
 package it.discovery.payment.service;
 
+import event.IntegrationEvent;
+import event.payment.PaymentSuccessEvent;
+import it.discovery.order.client.api.OrderFacade;
+import it.discovery.payment.domain.Payment;
 import it.discovery.payment.persistence.PaymentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
-//	private final OrderRepository orderRepository;
+    //	private final OrderRepository orderRepository;
 //
-private final PaymentGateway paymentGateway;
-//
+    private final PaymentGateway paymentGateway;
+    //
 //	private final NotificationService notificationService;
 //
-private final PaymentRepository paymentRepository;
+    private final PaymentRepository paymentRepository;
 
-	public void pay(int orderId) {
-//		Payment payment = paymentGateway.charge(order);
-//
+    private final OrderFacade orderFacade;
+
+    private final KafkaTemplate<Integer, IntegrationEvent> kafkaTemplate;
+
+    public void pay(int orderId) {
+        Payment payment = orderFacade.findOne(orderId).map(paymentGateway::charge).orElseThrow(() -> new
+                IllegalArgumentException(STR. "No order found: \{ orderId }" ));
 //		order.setPayed(true);
 //		orderRepository.save(order);
 //
-//		paymentRepository.save(payment);
+        paymentRepository.save(payment);
+
+        kafkaTemplate.send("payments", payment.getId(), new PaymentSuccessEvent(payment.getId()));
 
 //		Notification notification = new Notification();
 //		notification.setEmail(order.getCustomer().getEmail());
@@ -31,6 +42,6 @@ private final PaymentRepository paymentRepository;
 //
 //		notificationService.sendNotification(notification);
 //		System.out.println("Charging completed");
-	}
+    }
 
 }
