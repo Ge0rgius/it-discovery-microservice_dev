@@ -3,6 +3,7 @@ package it.discovery.order.client.api;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import it.discovery.order.client.dto.OrderDTO;
+import org.apache.commons.lang3.time.StopWatch;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
@@ -53,8 +55,7 @@ class OrderClientTest {
         OrderDTO orderDTO = orderClient.findOne(orderId).orElseThrow();
         assertEquals(orderId, orderDTO.getId());
 
-        //FIXME
-        // verify(1, getRequestedFor(urlMatching(STR."/orders/\{orderId}")));
+        wm.verify(1, getRequestedFor(urlMatching(STR. "/orders/\{ orderId }" )));
     }
 
     @Test
@@ -63,10 +64,12 @@ class OrderClientTest {
         wm.stubFor(get(urlEqualTo(STR. "/orders/\{ orderId }" )).willReturn(aResponse()
                 .withStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())));
 
+        StopWatch stopWatch = StopWatch.createStarted();
+
         Optional<OrderDTO> orderDTO = orderClient.findOne(orderId);
         assertTrue(orderDTO.isEmpty());
+        assertTrue(stopWatch.getTime(TimeUnit.MILLISECONDS) >= 400);
 
-        //FIXME
-        //verify(3, getRequestedFor(urlMatching(STR."/orders/\{orderId}")));
+        wm.verify(3, getRequestedFor(urlMatching(STR. "/orders/\{ orderId }" )));
     }
 }
