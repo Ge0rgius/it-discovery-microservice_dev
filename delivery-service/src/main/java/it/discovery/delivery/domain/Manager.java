@@ -21,5 +21,5 @@ public class Manager extends BaseEntity {
     private String phone;
 
     @OneToMany(mappedBy = "deliveryManager")
-    private List<Order> orders;
+    private List<Shipment> shipments;
 }

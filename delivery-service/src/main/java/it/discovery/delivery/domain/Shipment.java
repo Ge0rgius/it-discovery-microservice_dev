@@ -12,8 +12,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "ORDERS")
-public class Order extends BaseEntity {
+@Table
+public class Shipment extends BaseEntity {
+
+    private int orderId;
 
     private boolean delivered;
 

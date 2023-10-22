@@ -10,7 +10,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PaymentSuccessEvent extends BaseEvent {
 
-    public PaymentSuccessEvent(int paymentId) {
+    private int orderId;
+
+    public PaymentSuccessEvent(int paymentId, int orderId) {
         super(paymentId);
+        this.orderId = orderId;
     }
 }

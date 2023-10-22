@@ -33,7 +33,7 @@ public class OrderController {
 
     @PostMapping("{orderId}")
     public void completeOrder(@PathVariable int orderId) {
-        orderService.complete(orderId);
+        orderService.proceed(orderId);
     }
 
     @DeleteMapping("{orderId}")

@@ -3,7 +3,7 @@ spring:
     consumer:
       bootstrap-servers:
         - ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
-      group-id: order
+      group-id: delivery
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer

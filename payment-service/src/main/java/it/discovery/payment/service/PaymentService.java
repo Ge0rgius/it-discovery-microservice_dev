@@ -32,7 +32,7 @@ public class PaymentService {
 //
         paymentRepository.save(payment);
 
-        kafkaTemplate.send("payments", payment.getId(), new PaymentSuccessEvent(payment.getId()));
+        kafkaTemplate.send("payments", payment.getId(), new PaymentSuccessEvent(payment.getId(), orderId));
 
 //		Notification notification = new Notification();
 //		notification.setEmail(order.getCustomer().getEmail());
