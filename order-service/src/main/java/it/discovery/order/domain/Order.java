@@ -1,5 +1,6 @@
 package it.discovery.order.domain;
 
+import it.discovery.order.event.sourcing.OrderCreatedEvent;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,9 @@ public class Order extends BaseEntity {
     @ManyToOne
     private Customer customer;
 
+    //Used for event sourcing
+    private int customerId;
+
     private boolean payed;
 
     private boolean completed;
@@ -35,6 +39,12 @@ public class Order extends BaseEntity {
             items = new ArrayList<>();
         }
         items.add(item);
+    }
+
+    public void apply(OrderCreatedEvent event) {
+        //setId(event.getEntityId());
+        addItem(new OrderItem(event.getBookId(), event.getNumber(), event.getPrice()));
+        setCustomerId(event.getCustomerId());
     }
 
 }
